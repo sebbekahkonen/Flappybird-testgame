@@ -34,43 +34,12 @@
 
 		<v-main class="grey lighten-3">
 			<v-container>
-				<v-row>
-					<v-col
-						cols="12"
-						sm="2"
-					>
-						<v-sheet
-							rounded="lg"
-							min-height="268"
-						>
-							<!--  -->
-						</v-sheet>
-					</v-col>
-
-					<v-col
-						cols="12"
-						sm="8"
-					>
-						<v-sheet
-							min-height="70vh"
-							rounded="lg"
-						>
-							<router-view />
-							<!--  -->
-						</v-sheet>
-					</v-col>
-
-					<v-col
-						cols="12"
-						sm="2"
-					>
-						<v-sheet
-							rounded="lg"
-							min-height="268"
-						>
-							<!--  -->
-						</v-sheet>
-					</v-col>
+				<v-row
+					align="center"
+					justify="center"
+				>
+					<router-view />
+					<!--  -->
 				</v-row>
 			</v-container>
 		</v-main>
@@ -81,7 +50,7 @@
 export default {
 	data: () => ({
 		links: [
-			{title: 'Start', icon: 'mdi-play-box-outline', to:'/start'},
+			{title: 'Start', icon: 'mdi-play-box-outline', to:'/gamefield'},
 			{title: 'New Game', icon: 'mdi-autorenew', to:'/newgame'},
 			{title: 'Login', icon: 'mdi-account', to:'/login'},
 			{title: 'Exit', icon: 'mdi-exit-run', to:'/exit'}
