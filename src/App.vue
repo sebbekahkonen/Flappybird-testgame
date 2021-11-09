@@ -33,15 +33,8 @@
 		</v-app-bar>
 
 		<v-main class="grey lighten-3">
-			<v-container>
-				<v-row
-					align="center"
-					justify="center"
-				>
-					<router-view />
-					<!--  -->
-				</v-row>
-			</v-container>
+			<router-view />
+			<!--  -->
 		</v-main>
 	</v-app>
 </template>
