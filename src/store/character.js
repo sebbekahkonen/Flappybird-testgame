@@ -1,13 +1,24 @@
+const characterPosition = () => ({
+	characterX: null,
+	characterY: null
+});
+
 export default {
 	namespaced: true,
 
 	state: {
-		topValue: 45
+		topValue: 45,
+		position: characterPosition()
 	},
 	mutations: {
 		setTopValue(state, topValue) {
-			// console.log(topValue);
 			state.topValue = topValue;
+		},
+
+		setPosition(state, data) {
+			state.position.characterX = data[0];
+			state.position.characterY = data[1];
+
 		}
 	},
 	actions: {
@@ -15,11 +26,22 @@ export default {
 			const newTopValue = topValue;
 
 			commit('setTopValue', newTopValue);
+		},
+
+		changePosition({ commit }, data) {
+			console.log(data);
+			const newPosition = [data.x, data.y];
+
+			commit('setPosition', newPosition);
 		}
 	},
 	getters: {
 		getTopVal(state) {
 			return state.topValue;
+		},
+
+		getPosition(state) {
+			return state.position;
 		}
 	}
 };

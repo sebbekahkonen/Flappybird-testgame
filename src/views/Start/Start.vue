@@ -1,55 +1,65 @@
 <template>
-	<div class="testDiv"> 
-		<Keypress key-event="keyup" :key-code="13" @success="jump" />
+	<div class="startStopDiv">
+		<v-btn @click="startGame">Start</v-btn>
+		<v-btn @click="stopGame">Reset</v-btn>
 	</div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default {
 	components:{
-		Keypress: () => import('vue-keypress')
 	},
 	data: () => ({
-		num: 0
+		numVal: 0,
+		interval: null
 	}),
 
 	computed:{
-		...mapGetters('character', ['getTopVal'])
+		...mapGetters('character', ['getTopVal']),
+		...mapGetters('startgame', ['getStart'])
 	},
 
 	created() {
-		this.startGame();
 	},
 
 	methods: {
 		...mapActions('character', ['changeTopVal']),
+		...mapActions('startgame', ['changeStart']),
 		startGame() {
-			this.num =this.getTopVal;
 			this.interval = setInterval(() => {
-				this.num++;
-				this.changeTopVal(this.num);
-			}, 80);
+				this.changeStart(true);
+				// console.log(this.getStart);
+				this.numVal =this.getTopVal;
+				this.numVal++;
+				this.changeTopVal(this.numVal);
+			}, 50);
 		},
-		jump() {
-			this.num = this.num - 10;
-			this.changeTopVal(this.num);
+
+		stopGame() {
+			this.changeStart(false);
+			this.changeTopVal(45);
+			clearInterval(this.interval);
 		}
 	}
 	
 };
 </script>
 <style scoped>
-	.testDiv{
+	.startStopDiv{
 		color: green;
-		/* border: 1px solid red; */
-		width: 90px;
-		height: 90px;
+		width: 100%;
+		height: 100%;
 		top: 0%;
 		left: 0%;
-		/* top: 10%; */
-		/* left: 10%; */
+		border: 1px solid cyan;
 		position: absolute;
 	}
 
-
+	.startStopDiv button{
+		width: 30%;
+		background-color: grey;
+		margin: 2% 10% 10% 10%;
+		padding: 10px;
+		text-align: center;
+	}
 </style>
