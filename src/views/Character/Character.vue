@@ -1,6 +1,5 @@
 <template>
 	<div ref="character" class="gameCharacter" :style="{top: `${getTopVal}%`}">
-		<!-- <h1>{{ getTopVal }}</h1> -->
 		<Keypress key-event="keyup" 
 			:key-code="13" 
 			@success="jump"

@@ -142,22 +142,13 @@ export default {
 	position: relative;
 	width: 100%;
 	margin-top: 5%;
-	border: 1px solid pink
-}
-
-.startDiv{
 }
 
 .backgroundImg{
 	width: 100%;
 }
 
-/* .characterDiv{
-	position: absolute;
-	width: 100%;
-	left: 20%;
-	top: 40%;
-} */
+
 
 .firstPipeBottom, 
 .firstPipeTop, 
@@ -201,17 +192,12 @@ export default {
 	width: 5%;
 }
 .firstPipeTop{
-	/* background-size: 52px 250px;
-	height: 250px; */
 	background-size: 100% 100%;
 	height: 30%;
 	width: 5%;
 }
 
 .secondPipeBottom{
-	/* background-size: 52px 320px;
-	height: 320px; */
-
 	background-size: 100% 100%;
 	height: 30%;
 	width: 5%;
@@ -219,47 +205,32 @@ export default {
 }
 
 .secondPipeTop{
-	/* background-size: 52px 320px;
-	height: 320px; */
-
 	background-size: 100% 100%;
 	height: 45%;
 	width: 5%;
 	margin-left: 400px;
 }
 
-.thirdPipeBottom{
-	/* background-size: 52px 500px;
-	height: 500px; */
-	
+.thirdPipeBottom{	
 	background-size: 100% 100%;
 	height: 45%;
 	width: 5%;
 	margin-left: 800px;
 }
-.thirdPipeTop{
-	/* background-size: 52px 200px;
-	height: 200px; */
-	
+.thirdPipeTop{	
 	background-size: 100% 100%;
 	height: 30%;
 	width: 5%;
 	margin-left: 800px;
 }
 
-.fourthPipeBottom{
-	/* background-size: 52px 500px;
-	height: 500px; */
-	
+.fourthPipeBottom{	
 	background-size: 100% 100%;
 	height: 55%;
 	width: 5%;
 	margin-left: 1200px;
 }
-.fourthPipeTop{
-	/* background-size: 52px 200px;
-	height: 200px; */
-	
+.fourthPipeTop{	
 	background-size: 100% 100%;
 	height: 25%;
 	width: 5%;
@@ -267,19 +238,13 @@ export default {
 }	
 
 
-.fifthPipeBottom{
-	/* background-size: 52px 500px;
-	height: 500px; */
-	
+.fifthPipeBottom{	
 	background-size: 100% 100%;
 	height: 35%;
 	width: 5%;
 	margin-left: 1600px;
 }
-.fifthPipeTop{
-	/* background-size: 52px 200px;
-	height: 200px; */
-	
+.fifthPipeTop{	
 	background-size: 100% 100%;
 	height: 45%;
 	width: 5%;
