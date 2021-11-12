@@ -26,7 +26,6 @@
 			<!-- fifth set of pipes -->	
 			<div ref="fifthPipeBottom" class="fifthPipeBottom"><p>fifthPipeBottom</p></div>
 			<div ref="fifthPipeTop" class="fifthPipeTop">fifthPipeTop</div>
-			<v-btn @click="changePosition">test</v-btn>
 		</div>
 	</div>
 </template>
@@ -34,6 +33,7 @@
 import Start from '../Start/Start.vue';
 import Character from '../Character/Character.vue';
 import { mapGetters, mapActions } from 'vuex';
+import Vue from 'vue';
 export default {
 	components:{
 		Character,
@@ -44,28 +44,28 @@ export default {
 		interval: null,
 		firstSet: {
 			y: null,
-			bottomX: null,
-			topBottom: null
+			bottomPipeX: null,
+			topPipeX: null
 		},
 		secondSet: {
 			y: null,
-			bottomX: null,
-			topBottom: null
+			bottomPipeX: null,
+			topPipeX: null
 		},
 		thirdSet: {
 			y: null,
-			bottomX: null,
-			topBottom: null
+			bottomPipeX: null,
+			topPipeX: null
 		},
 		fourthSet: {
 			y: null,
-			bottomX: null,
-			topBottom: null
+			bottomPipeX: null,
+			topPipeX: null
 		},
 		fifthSet: {
 			y: null,
-			bottomX: null,
-			topBottom: null
+			bottomPipeX: null,
+			topPipeX: null
 		}
 	}),
 
@@ -76,12 +76,10 @@ export default {
 		...mapGetters('pipes', ['getThirdSet']),
 		...mapGetters('pipes', ['getFourthSet']),
 		...mapGetters('pipes', ['getFifthSet'])
-
 	},
-
-	// created() {
-	// 	this.callChangePosition();
-	// },
+	mounted() {
+		Vue.nextTick(this.setPipePosition);
+	},
 
 	methods: {
 		...mapActions('startgame', ['changeStart']),
@@ -91,63 +89,48 @@ export default {
 		...mapActions('pipes', ['changeFourthSet']),
 		...mapActions('pipes', ['changeFifthSet']),
 
-		callChangePosition() {
-			this.changePosition();
-		},
-
-		changePosition() { 
-			console.log(this.getFirstSet);
+		setPipePosition() { 
 			this.interval = setInterval(() => {
-				this.firstSet.y = Math.round(this.$refs.firstPipeBottom.getBoundingClientRect().left);
-				this.firstSet.bottomX = Math.round(this.$refs.firstPipeBottom.getBoundingClientRect().top);
-				this.firstSet.topBottom = Math.round(this.$refs.firstPipeTop.getBoundingClientRect().bottom);
+				if(this.getStart) {
+					this.firstSet.y = Math.round(this.$refs.firstPipeBottom.getBoundingClientRect().left);
+					this.firstSet.bottomPipeX = Math.round(this.$refs.firstPipeBottom.getBoundingClientRect().top);
+					this.firstSet.topPipeX = Math.round(this.$refs.firstPipeTop.getBoundingClientRect().bottom);
+					// console.log('First: ', 'Both Y: ',this.firstSet.y, 'Bottom X: ',this.firstSet.bottomPipeX, 'Top Bottom: ',this.firstSet.topPipeX);
+					this.changeFirstSet(this.firstSet);
+	
+					/* Second set */
+					this.secondSet.y = Math.round(this.$refs.secondPipeBottom.getBoundingClientRect().left);
+					this.secondSet.bottomPipeX = Math.round(this.$refs.secondPipeBottom.getBoundingClientRect().top);
+					this.secondSet.topPipeX = Math.round(this.$refs.secondPipeTop.getBoundingClientRect().bottom);
+					// console.log('Second: ', 'Both Y: ',this.secondSet.y, 'Bottom X: ',this.secondSet.bottomPipeX, 'Top Bottom: ',this.secondSet.topPipeX);
+					this.changeSecondSet(this.secondSet);
+	
+					/* Third set */
+					this.thirdSet.y = Math.round(this.$refs.thirdPipeBottom.getBoundingClientRect().left);
+					this.thirdSet.bottomPipeX = Math.round(this.$refs.thirdPipeBottom.getBoundingClientRect().top);
+					this.thirdSet.topPipeX = Math.round(this.$refs.thirdPipeTop.getBoundingClientRect().bottom);
+					// console.log('Third: ', 'Both Y: ',this.thirdSet.y, 'Bottom X: ',this.thirdSet.bottomPipeX, 'Top Bottom: ',this.thirdSet.topPipeX);
+					this.changeThirdSet(this.thirdSet);
+	
+					/* Fourth set */
+					this.fourthSet.y = Math.round(this.$refs.fourthPipeBottom.getBoundingClientRect().left);
+					this.fourthSet.bottomPipeX = Math.round(this.$refs.fourthPipeBottom.getBoundingClientRect().top);
+					this.fourthSet.topPipeX = Math.round(this.$refs.fourthPipeTop.getBoundingClientRect().bottom);
+					// console.log('Fourth: ', 'Both Y: ',this.fourthSet.y, 'Bottom X: ',this.fourthSet.bottomPipeX, 'Top Bottom: ',this.fourthSet.topPipeX);
+					this.changeFourthSet(this.fourthSet);
+	
+					/* Fifth set */
+					this.fifthSet.y = Math.round(this.$refs.fifthPipeBottom.getBoundingClientRect().left);
+					this.fifthSet.bottomPipeX = Math.round(this.$refs.fifthPipeBottom.getBoundingClientRect().top);
+					this.fifthSet.topPipeX = Math.round(this.$refs.fifthPipeTop.getBoundingClientRect().bottom);
+					// console.log('Fifth: ', 'Both Y: ',this.fifthSet.y, 'Bottom X: ',this.fifthSet.bottomPipeX, 'Top Bottom: ',this.fifthSet.topPipeX);
+					this.changeFifthSet(this.fifthSet);
+				} else{
+					return;
+				}
+				/* First set */
 
-				console.log('First: ', 'Both Y: ',this.firstSet.y, 'Bottom X: ',this.firstSet.bottomX, 'Top Bottom: ',this.firstSet.topBottom);
-				this.changeFirstSet(this.firstSet);
-
-				console.log(this.getFirstSet);
-
-				this.changeSecondSet();
-				this.changeThirdSet();
-				this.changeFourthSet();
-				this.changeFifthSet();
-			}, 10000);
-		},
-
-		test() {
-			// const testit = Math.round(this.$refs.test.getBoundingClientRect);
-			// const leftval = Math.round(this.$refs.main.getBoundingClientRect().outerHeight);
-			/*FirstSet*/
-			const firstSetValueY = Math.round(this.$refs.firstPipeBottom.getBoundingClientRect().left);
-			const firstPipeBottomValueX = Math.round(this.$refs.firstPipeBottom.getBoundingClientRect().top);
-			const firstPipeTopValueBottom = Math.round(this.$refs.firstPipeTop.getBoundingClientRect().bottom);
-			/*SecondSet*/
-			const secondSetValueY = Math.round(this.$refs.secondPipeBottom.getBoundingClientRect().left);
-			const secondPipeBottomValueX = Math.round(this.$refs.secondPipeBottom.getBoundingClientRect().top);
-			const secondPipeTopValueBottom = Math.round(this.$refs.secondPipeTop.getBoundingClientRect().bottom);
-			/*ThirdSet*/
-			const thirdSetValueY = Math.round(this.$refs.thirdPipeBottom.getBoundingClientRect().left);
-			const thirdPipeBottomValueX = Math.round(this.$refs.thirdPipeBottom.getBoundingClientRect().top);
-			const thirdPipeTopValueBottom = Math.round(this.$refs.thirdPipeTop.getBoundingClientRect().bottom);
-			/*FourthSet*/
-			const fourthSetValueY = Math.round(this.$refs.fourthPipeBottom.getBoundingClientRect().left);
-			const fourthPipeBottomValueX = Math.round(this.$refs.fourthPipeBottom.getBoundingClientRect().top);
-			const fourthPipeTopValueBottom = Math.round(this.$refs.fourthPipeTop.getBoundingClientRect().bottom);
-			/*FifthSet*/ 
-			const fifthSetValueY = Math.round(this.$refs.fifthPipeBottom.getBoundingClientRect().left);
-			const fifthPipeBottomValueX = Math.round(this.$refs.fifthPipeBottom.getBoundingClientRect().top);
-			const fifthPipeTopValueBottom = Math.round(this.$refs.fifthPipeTop.getBoundingClientRect().bottom);
-
-			console.log('First: ', 'Both Y: ',firstSetValueY, 'Bottom X: ',firstPipeBottomValueX, 'Top Bottom: ',firstPipeTopValueBottom);
-			console.log('Second: ', 'Both Y: ',secondSetValueY, 'Bottom X: ',secondPipeBottomValueX, 'Top Bottom: ',secondPipeTopValueBottom);
-			console.log('Second: ', 'Both Y: ',thirdSetValueY, 'Bottom X: ',thirdPipeBottomValueX, 'Top Bottom: ',thirdPipeTopValueBottom);
-			console.log('Second: ', 'Both Y: ',fourthSetValueY, 'Bottom X: ',fourthPipeBottomValueX, 'Top Bottom: ',fourthPipeTopValueBottom);
-			console.log('Second: ', 'Both Y: ',fifthSetValueY, 'Bottom X: ',fifthPipeBottomValueX, 'Top Bottom: ',fifthPipeTopValueBottom);
-			// console.log(leftval);
-
-			// if(leftval > 40 && leftval < 60) {
-			// 	console.log(this.$refs.firstPipeBottom.getBoundingClientRect().left);
-			// }
+			}, 10);
 		}
 	}
 

@@ -29,7 +29,6 @@ export default {
 		},
 
 		changePosition({ commit }, data) {
-			console.log(data);
 			const newPosition = [data.x, data.y];
 
 			commit('setPosition', newPosition);

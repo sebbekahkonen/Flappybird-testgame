@@ -2,7 +2,7 @@
 	<div ref="character" class="gameCharacter" :style="{top: `${getTopVal}%`}">
 		<!-- <h1>{{ getTopVal }}</h1> -->
 		<Keypress key-event="keyup" 
-			:key-code="32" 
+			:key-code="13" 
 			@success="jump"
 		/>
 	</div>
@@ -19,17 +19,22 @@ export default {
 			x: null,
 			y: null
 		},
-		interval: null,
-		num: 0
+		interval: null
 	}),
 
 	computed:{
 		...mapGetters('character', ['getTopVal']),
 		...mapGetters('character', ['getPosition']),
-		...mapGetters('startgame', ['getStart'])
+		...mapGetters('startgame', ['getStart']),
+		...mapGetters('pipes', ['getFirstSet']),
+		...mapGetters('pipes', ['getSecondSet']),
+		...mapGetters('pipes', ['getThirdSet']),
+		...mapGetters('pipes', ['getFourthSet']),
+		...mapGetters('pipes', ['getFifthSet'])
 	},
 
 	created() {
+		this.characterCollision();
 	},
 
 	methods:{
@@ -38,28 +43,79 @@ export default {
 		...mapActions('startgame', ['changeStart']),
 
 		startTheGame() {
-			// console.log(this.getStart);
 			this.changeStart(true);
-			// console.log(this.getStart);
 		},
 
 		stopTheGame() {
-			// console.log(this.getStart);
 			this.changeStart(false);
-			// console.log(this.getStart);
+		},
+
+		characterCollision() {
+			this.interval = setInterval(() => {
+				this.position.x = Math.round(this.$refs.character.getBoundingClientRect().top);
+				this.position.y = Math.round(this.$refs.character.getBoundingClientRect().left);
+				this.changePosition(this.position);
+				/* Character position rounded nearest 50 */
+				let characterX = Math.round(this.getPosition.characterX / 30) * 30;
+				let characterY = Math.round(this.getPosition.characterY / 50) * 50;
+				/* First set position rounded to nearest 50 */
+				let firstSetBottomX = Math.round(this.getFirstSet.bottomPipeX / 30) * 30;
+				let firstSetTopX =	Math.round(this.getFirstSet.topPipeX / 30) * 30;
+				let firstSetY = Math.round(this.getFirstSet.y / 50) * 50;
+
+				if(characterX >= firstSetBottomX && characterY === firstSetY
+				||
+				characterX <= firstSetTopX && characterY === firstSetY) {
+					console.log('********GOT HIT FIRST********');
+				}
+
+				/*	Second set position rounded to nearest 50 */
+				let secondSetBottomX = Math.round(this.getSecondSet.bottomPipeX / 30) * 30;
+				let secondSetTopX =	Math.round(this.getSecondSet.topPipeX / 30) * 30;
+				let secondSetY = Math.round(this.getSecondSet.y / 50) * 50;
+
+				if(characterX >= secondSetBottomX && characterY === secondSetY
+				||
+				characterX <= secondSetTopX && characterY === secondSetY) {
+					console.log('********GOT HIT SECOND********');
+				}
+
+				/*	Third set position rounded to nearest 50 */
+				let thirdSetBottomX = Math.round(this.getThirdSet.bottomPipeX / 30) * 30;
+				let thirdSetTopX =	Math.round(this.getThirdSet.topPipeX / 30) * 30;
+				let thirdSetY = Math.round(this.getThirdSet.y / 50) * 50;
+
+				if(characterX >= thirdSetBottomX && characterY === thirdSetY
+				||
+				characterX <= thirdSetTopX && characterY === thirdSetY) {
+					console.log('********GOT HIT THIRD********');
+				}
+
+				/*	Fourth set position rounded to nearest 50 */
+				let fourthSetBottomX = Math.round(this.getFourthSet.bottomPipeX / 30) * 30;
+				let fourthSetTopX =	Math.round(this.getFourthSet.topPipeX / 30) * 30;
+				let fourthSetY = Math.round(this.getFourthSet.y / 50) * 50;
+
+				if(characterX >= fourthSetBottomX && characterY === fourthSetY
+				||
+				characterX <= fourthSetTopX && characterY === fourthSetY) {
+					console.log('********GOT HIT FOURTH********');
+				}
+
+				/*	Fifth set position rounded to nearest 50 */
+				let fifthSetBottomX = Math.round(this.getFifthSet.bottomPipeX / 30) * 30;
+				let fifthSetTopX =	Math.round(this.getFifthSet.topPipeX / 30) * 30;
+				let fifthSetY = Math.round(this.getFifthSet.y / 50) * 50;
+
+				if(characterX >= fifthSetBottomX && characterY === fifthSetY
+				||
+				characterX <= fifthSetTopX && characterY === fifthSetY) {
+					console.log('********GOT HIT FIFTH********');
+				}
+			}, 10);
 		},
 		
 		jump() {
-			this.position.x = Math.round(this.$refs.character.getBoundingClientRect().left);
-			this.position.y = Math.round(this.$refs.character.getBoundingClientRect().top);
-			console.log('LEFT(X): ',this.getPosition.characterX);
-			console.log('TOP(Y): ',this.getPosition.characterY);
-			this.changePosition(this.position);
-			console.log('CHANGED_LEFT(X): ',this.getPosition.characterX);
-			console.log('CHANGED_TOP(Y): ',this.getPosition.characterY);
-			console.log(Math.round(this.$refs.character.getBoundingClientRect().top));
-			// console.log(this.getTopVal);
-			// this.num = this.getTopVal - 7;
 			this.changeTopVal(this.getTopVal - 7);
 		}
 	}
