@@ -29,7 +29,8 @@ export default {
 		...mapGetters('pipes', ['getSecondSet']),
 		...mapGetters('pipes', ['getThirdSet']),
 		...mapGetters('pipes', ['getFourthSet']),
-		...mapGetters('pipes', ['getFifthSet'])
+		...mapGetters('pipes', ['getFifthSet']),
+		...mapGetters('score', ['getScore'])
 	},
 
 	created() {
@@ -40,6 +41,7 @@ export default {
 		...mapActions('character', ['changeTopVal']),
 		...mapActions('character', ['changePosition']),
 		...mapActions('startgame', ['changeStart']),
+		...mapActions('score', ['changeScore']),
 
 		startTheGame() {
 			this.changeStart(true);
@@ -61,6 +63,24 @@ export default {
 				let firstSetBottomX = Math.round(this.getFirstSet.bottomPipeX / 30) * 30;
 				let firstSetTopX =	Math.round(this.getFirstSet.topPipeX / 30) * 30;
 				let firstSetY = Math.round(this.getFirstSet.y / 50) * 50;
+
+				// console.log(this.getPosition.characterY);
+				//78
+				if(firstSetY < 0 || 
+				secondSetY < 0 || 
+				thirdSetY < 0 || 
+				fourthSetY < 0 || 
+				fifthSetY < 0) {
+					let count = 0;
+
+					console.log('made it to the function');
+
+					if(count === 0) {
+						console.log('count is 0');
+						this.changeScore(this.getScore + 100);
+						count++;
+					}
+				}
 
 				if(characterX >= firstSetBottomX && characterY === firstSetY
 				||
@@ -129,6 +149,5 @@ export default {
 	width: 7%;
 	left: 9%;
 	height: 70px;
-	border: 1px solid green;
 }
 </style>

@@ -27,17 +27,22 @@
 			<div ref="fifthPipeBottom" class="fifthPipeBottom"><p>fifthPipeBottom</p></div>
 			<div ref="fifthPipeTop" class="fifthPipeTop">fifthPipeTop</div>
 		</div>
+		<div class="scoreDiv">
+			<Score />
+		</div>
 	</div>
 </template>
 <script>
-import Start from '../Start/Start.vue';
 import Character from '../Character/Character.vue';
+import Start from '../Start/Start.vue';
+import Score from '../Score/Score.vue';
 import { mapGetters, mapActions } from 'vuex';
 import Vue from 'vue';
 export default {
 	components:{
 		Character,
-		Start		
+		Start,
+		Score		
 	},
 
 	data: () => ({
@@ -146,6 +151,13 @@ export default {
 
 .backgroundImg{
 	width: 100%;
+}
+
+.scoreDiv{
+	color: white;
+	bottom: 0%;
+	left: 0%;
+	position: absolute;
 }
 
 

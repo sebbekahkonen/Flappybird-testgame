@@ -51,7 +51,6 @@ export default {
 		height: 100%;
 		top: 0%;
 		left: 0%;
-		border: 1px solid cyan;
 		position: absolute;
 	}
 
