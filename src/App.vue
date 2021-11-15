@@ -2,7 +2,7 @@
 	<v-app id="inspire">
 		<v-app-bar
 			app
-			color="white"
+			color="grey darken-3"
 			flat
 		>
 			<v-avatar
@@ -13,7 +13,7 @@
 			<v-tabs
 				centered
 				class="ml-n9"
-				color="grey darken-1"
+				color="white"
 			>
 				<v-tab
 					v-for="link in links"
@@ -32,7 +32,7 @@
 			/>
 		</v-app-bar>
 
-		<v-main class="grey lighten-3">
+		<v-main class="grey darken-1">
 			<router-view />
 			<!--  -->
 		</v-main>
@@ -51,3 +51,6 @@ export default {
 	})
 };
 </script>
+
+<style>
+</style>
