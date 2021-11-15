@@ -4,6 +4,7 @@ import character from './character';
 import startgame from './startgame';
 import pipes from './pipes';
 import score from './score';
+import gameover from './gameover';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
 		character,
 		startgame,
 		pipes,
-		score
+		score,
+		gameover
 	}
 });

@@ -7,7 +7,7 @@ export default {
 	namespaced: true,
 
 	state: {
-		topValue: 45,
+		topValue: 300,
 		position: characterPosition()
 	},
 	mutations: {

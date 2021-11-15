@@ -16,7 +16,8 @@ export default {
 
 	computed:{
 		...mapGetters('character', ['getTopVal']),
-		...mapGetters('startgame', ['getStart'])
+		...mapGetters('startgame', ['getStart']),
+		...mapGetters('startgame', ['getKeydown'])
 	},
 
 	created() {
@@ -27,17 +28,23 @@ export default {
 		...mapActions('startgame', ['changeStart']),
 		startGame() {
 			this.interval = setInterval(() => {
-				this.changeStart(true);
-				// console.log(this.getStart);
-				this.numVal =this.getTopVal;
-				this.numVal++;
-				this.changeTopVal(this.numVal);
-			}, 50);
+				// console.log('stillgoing');
+				// console.log(this.getKeydown);
+
+				if(this.getKeydown === false) {
+					// console.log('stillgoing');
+					this.changeStart(true);
+					// console.log(this.getStart);
+					this.numVal =this.getTopVal;
+					this.numVal++;
+					this.changeTopVal(this.numVal);
+				}
+			}, 1);
 		},
 
 		stopGame() {
 			this.changeStart(false);
-			this.changeTopVal(45);
+			this.changeTopVal(300);
 			clearInterval(this.interval);
 		}
 	}
