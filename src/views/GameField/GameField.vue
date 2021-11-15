@@ -4,7 +4,7 @@
 			src="@/assets/background-image.png"
 			class="mtbackgroundImg"
 		/>
-		<div class="startDiv"><Start /></div>
+		<!-- <div class="startDiv"><Start /></div> -->
 		<div class="characterDiv"><Character /></div>
 		<!-- First set of pipes -->
 		<div v-if="getStart" ref="test">
@@ -34,14 +34,14 @@
 </template>
 <script>
 import Character from '../Character/Character.vue';
-import Start from '../Start/Start.vue';
+// import Start from '../Start/Start.vue';
 import Score from '../Score/Score.vue';
 import { mapGetters, mapActions } from 'vuex';
 import Vue from 'vue';
 export default {
 	components:{
 		Character,
-		Start,
+		// Start,
 		Score		
 	},
 

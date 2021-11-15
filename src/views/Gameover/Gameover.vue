@@ -19,13 +19,24 @@ export default {
 		...mapActions('gameover', ['changeGameover']),
 
 		gameIsOver() {
-			this.changeStart(false);
-			this.changeTopVal(300);
+			console.log('called');
+			this.changeGameover(true);
 		}
 	}
 	
 };
 </script>
-<style>
+<style scoped>
+
+div {
+	width: 100%;
+	height: 50%;
+	position: absolute;
+	/* border: 1px solid green; */
+	top: 25%;
+	left: 0%;
+	font-size: 40px;
+	text-align: center;
+}
 	
 </style>

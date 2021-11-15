@@ -8,17 +8,13 @@
 			:key-code="13" 
 			@success="stopJump"
 		/>
-
-		<Gameover v-if="getGameover" />
 	</div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import Gameover from '../Gameover/Gameover.vue';
 export default {
 	components:{
-		Keypress: () => import('vue-keypress'),
-		Gameover
+		Keypress: () => import('vue-keypress')
 	},
 
 	data: () =>({
@@ -88,6 +84,7 @@ export default {
 				characterX <= firstSetTopX && characterY === firstSetY) {
 						// console.log('********GOT HIT FIRST********');
 						this.changeGameover(true);
+						this.changeStart(false);
 					}
 
 					/*	Second set position rounded to nearest 50 */
@@ -99,7 +96,8 @@ export default {
 				||
 				characterX <= secondSetTopX && characterY === secondSetY) {
 						// console.log('********GOT HIT SECOND********');
-						alert('got hit second');
+						this.changeGameover(true);
+						this.changeStart(true);
 					}
 
 					/*	Third set position rounded to nearest 50 */
@@ -111,7 +109,8 @@ export default {
 				||
 				characterX <= thirdSetTopX && characterY === thirdSetY) {
 						// console.log('********GOT HIT THIRD********');
-						alert('got hit third');
+						this.changeGameover(true);
+						this.changeStart(true);
 					}
 
 					/*	Fourth set position rounded to nearest 50 */
@@ -123,7 +122,8 @@ export default {
 				||
 				characterX <= fourthSetTopX && characterY === fourthSetY) {
 						// console.log('********GOT HIT FOURTH********');
-						alert('got hit fourth');
+						this.changeGameover(true);
+						this.changeStart(true);
 					}
 
 					/*	Fifth set position rounded to nearest 50 */
@@ -135,7 +135,8 @@ export default {
 				||
 				characterX <= fifthSetTopX && characterY === fifthSetY) {
 					// console.log('********GOT HIT FIFTH********');
-						alert('got hit fifth');
+						this.changeGameover(true);
+						this.changeStart(true);
 					}
 
 				} else{
@@ -147,7 +148,7 @@ export default {
 		
 		jump() {
 			if(this.getStart === true) {
-				console.log('test');
+				// console.log('test');
 				this.changeKeydown(true);
 	
 				this.jumpInterval = setInterval(() => {
@@ -163,7 +164,7 @@ export default {
 
 		stopJump() {
 			this.changeKeydown(false);
-			console.log(this.getKeydown);
+			// console.log(this.getKeydown);
 			// console.log('cleared');
 			clearInterval(this.jumpInterval);
 		}
