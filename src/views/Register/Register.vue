@@ -1,50 +1,64 @@
 <template>
-	<div> 
-		<v-form
-			ref="form"
-			v-model="valid"
-			lazy-validation
+	<div class="registerDiv" color="grey lighten-2"> 
+		<v-sheet
+			elevation="18"
+			class="mx-auto"
+			height="500px"
+			width="100%"
+			color="grey lighten-2"
 		>
-			<v-text-field
-				v-model="name"
-				:counter="10"
-				:rules="nameRules"
-				label="Username"
-				required
-			/>
-
-			<v-text-field
-				v-model="password"
-				:rules="passwordRules"
-				label="Password"
-				required
-			/>
-
-			<v-text-field
-				v-model="email"
-				:rules="emailRules"
-				label="E-mail"
-				required
-			/>
-
-			<v-checkbox
-				v-model="checkbox"
-				:rules="[v => !!v || 'You must agree to continue!']"
-				label="Do you agree to the terms and conditions?"
-				required
-			/>
-
-			<v-btn
-				:disabled="!valid"
-				color="grey lighten-3"
-				class="mr-4 ml-16"
-				width="1100px"
-				
-				@click="Register"
+			<h1>Register</h1>
+			<v-form
+				ref="form"
+				v-model="valid"
+				lazy-validation
+				class="registerForm"
 			>
-				Register
-			</v-btn>
-		</v-form>
+				<v-text-field
+					v-model="name"
+					:counter="10"
+					:rules="nameRules"
+					label="Username"
+					class="username"
+					required
+				/>
+
+				<v-text-field
+					v-model="password"
+					:rules="passwordRules"
+					label="Password"
+					class="password"
+					required
+				/>
+
+				<v-text-field
+					v-model="email"
+					:rules="emailRules"
+					label="E-mail"
+					class="email"
+					required
+				/>
+
+				<v-checkbox
+					v-model="checkbox"
+					:rules="[v => !!v || 'You must agree to continue!']"
+					label="Do you agree to the terms and conditions?"
+					class="checkBox"
+					required
+				/>
+
+				<v-btn
+					:disabled="!valid"
+					color="grey lighten-3"
+					class="mr-4"
+					width="350px"
+				
+					@click="Register"
+				>
+					Register
+				</v-btn>
+			</v-form>
+		</v-sheet>
 	</div>
 </template>
 <script>
@@ -84,4 +98,42 @@ export default {
 };
 </script>
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap');
+
+	.registerDiv{
+		margin-top: 20%;
+		position: absolute;
+		left: 25%;
+		width: 50%;
+		height: 500px;
+		/* border: 1px solid green; */
+		text-align: center;
+		border-radius: 10px;
+		/* background: linear-gradient(to bottom, rgb(194, 194, 194), rgb(235, 235, 235)); */
+	}
+	
+	h1{
+		margin-bottom: 30px;
+		font-family: 'Shippori Antique B1', sans-serif;
+	}
+
+	.mx-auto{
+		border-radius: 10px;
+	}
+
+	.username{
+		padding: 10px;
+	}
+
+	.password{
+		padding: 10px;	
+	}
+
+	.email{
+		padding: 10px;
+	}
+
+	.checkBox{
+		padding-left: 10px;
+	}
 </style>
