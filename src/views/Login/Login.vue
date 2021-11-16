@@ -25,7 +25,7 @@
 				@click:append="show1 = !show1"
 			/>
 			<v-btn v-if="!isPending" color="blue-grey lighten-2" class="loginBtn" @click="loginUser">Login</v-btn>
-			<v-btn v-if="!isPending" color="blue-grey darken-1" class="registerBtn">Register</v-btn>
+			<v-btn v-if="!isPending" color="blue-grey darken-1" class="registerBtn" @click="$router.push('/register')">Register</v-btn>
 			<Spinner v-if="isPending" />
 		</v-sheet>
 	</div>
@@ -59,7 +59,6 @@ export default {
 	},
 
 	created() {
-		console.log(this.getAuthentication);
 		this.changeAuthentication(false);
 	},
 	

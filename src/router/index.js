@@ -5,6 +5,7 @@ import start from '@/views/Start/routes';
 import newgame from '@/views/NewGame/routes';
 import login from '@/views/Login/routes';
 import exit from '@/views/Exit/routes';
+import register from '@/views/Register/routes';
 import gamefield from '@/views/GameField/routes';
 
 Vue.use(VueRouter);
@@ -15,7 +16,8 @@ const routes = [
 	...newgame,
 	...login,
 	...exit,
-	...gamefield
+	...gamefield,
+	...register
 ];
 const router = new VueRouter({
 	mode: 'history',

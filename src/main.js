@@ -16,8 +16,8 @@ const httpClient = axios.create({
 	}
 });
 
-console.log(store.state.user.user.token);
-console.log(store.state.user.user.username);
+// console.log(store.state.user.user.token);
+// console.log(store.state.user.user.username);
 httpClient.interceptors.request.use(config => {
 	const token = store.state.user.user.token;
 
