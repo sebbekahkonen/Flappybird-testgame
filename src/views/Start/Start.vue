@@ -29,7 +29,8 @@ export default {
 		...mapGetters('gameover', ['getGameover']),
 		...mapGetters('score', ['getScore']),
 		...mapGetters('score', ['getHighScore']),
-		...mapGetters('authentication', ['getAuthentication'])
+		...mapGetters('authentication', ['getAuthentication']),
+		...mapGetters('user', ['getNewUser'])
 	},
 
 	created() {
@@ -52,6 +53,7 @@ export default {
 		},
 
 		startGame() {
+			console.log(this.getNewUser);
 			this.changeGameover(false);
 			this.interval = setInterval(() => {
 				if(this.getKeydown === false) {

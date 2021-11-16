@@ -44,7 +44,7 @@ export default {
 	data: () => ({
 		links: [
 			{title: 'Start', icon: 'mdi-play-box-outline', to:'/'},
-			{title: 'New Game', icon: 'mdi-autorenew', to:'/newgame'},
+			{title: 'Profile', icon: 'mdi-autorenew', to:'/profile'},
 			{title: 'Login', icon: 'mdi-account', to:'/login'},
 			{title: 'Exit', icon: 'mdi-exit-run', to:'/exit'}
 		]

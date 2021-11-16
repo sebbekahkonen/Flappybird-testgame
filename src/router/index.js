@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import character from '@/views/Character/routes';
 import start from '@/views/Start/routes';
-import newgame from '@/views/NewGame/routes';
+import profile from '@/views/Profile/routes';
 import login from '@/views/Login/routes';
 import exit from '@/views/Exit/routes';
 import register from '@/views/Register/routes';
@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 const routes = [
 	...character,
 	...start,
-	...newgame,
+	...profile,
 	...login,
 	...exit,
 	...gamefield,

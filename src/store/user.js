@@ -9,17 +9,29 @@ const initialState = () => ({
 	phonenumber: null,
 	token: ''
 });
+const initialStateNewUser = () => ({
+	id: null,
+	username: '',
+	email: '',
+	password: '',
+	token: 'testtoken'
+});
 
 export default {
 	namespaced: true,
 
 	state: {
-		user: initialState()
+		user: initialState(),
+		newUser: initialStateNewUser()
 	},
 	mutations: {
 		setUser(state, data) {
 			console.log(data);
 			state.user = data;
+		},
+
+		setNewUser(state, data) {
+			state.newUser = data;
 		}
 	},
 	actions: {
@@ -30,6 +42,12 @@ export default {
 
 		},
 
+		addUser({ commit }, data) {
+			const newUser = [data.username, data.id, data.token, data.email, data.password];
+
+			commit('setNewUser', newUser);
+		},
+
 		logout({ commit }) {
 			commit('setUser', initialState());
 			router.push('/login');
@@ -38,6 +56,12 @@ export default {
 	getters: {
 		getUser(state) {
 			return state.user;
+		},
+
+		getNewUser(state) {
+			console.log(state.newUser);
+
+			return state.newUser;
 		}
 	}
 };

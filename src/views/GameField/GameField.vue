@@ -6,8 +6,14 @@
 		/>
 		<!-- <div class="startDiv"><Start /></div> -->
 		<div class="characterDiv"><Character /></div>
+		<div class="difficultyDiv">
+			<h1 v-if="getDifficulty.normal">Difficulty: NORMAL</h1>
+			<h1 v-if="getDifficulty.medium">Difficulty: MEDIUM</h1>
+			<h1 v-if="getDifficulty.hard">Difficulty: HARD</h1>
+			<h1 v-if="getDifficulty.expert">Difficulty: EXPERT</h1>
+		</div>
 		<!-- First set of pipes -->
-		<div v-if="getStart" ref="test">
+		<div v-if="getStart" ref="test" :class="getDifficulty">
 			<div ref="firstPipeBottom" class="firstPipeBottom"><p>firstpipeBottom</p></div>
 			<div ref="firstPipeTop" class="firstPipeTop">firstpipeTop</div>
 
@@ -71,16 +77,29 @@ export default {
 			y: null,
 			bottomPipeX: null,
 			topPipeX: null
+		},
+		difficulty: {
+			normal: false,
+			medium: false,
+			hard: false,
+			expert: false
 		}
 	}),
 
 	computed: {
 		...mapGetters('startgame', ['getStart']),
-		...mapGetters('pipes', ['getFirstSet']),
-		...mapGetters('pipes', ['getSecondSet']),
-		...mapGetters('pipes', ['getThirdSet']),
-		...mapGetters('pipes', ['getFourthSet']),
-		...mapGetters('pipes', ['getFifthSet'])
+		...mapGetters('pipes', 
+			['getFirstSet', 
+				'getSecondSet', 
+				'getThirdSet', 
+				'getFourthSet', 
+				'getFifthSet' ]),
+		// ...mapGetters('pipes', ['getSecondSet']),
+		// ...mapGetters('pipes', ['getThirdSet']),
+		// ...mapGetters('pipes', ['getFourthSet']),
+		// ...mapGetters('pipes', ['getFifthSet']),
+		...mapGetters('difficulty', ['getDifficulty']),
+		...mapGetters('score', ['getScore'])
 	},
 	mounted() {
 		// Vue.nextTick(this.checkAuthentication);
@@ -94,10 +113,50 @@ export default {
 		...mapActions('pipes', ['changeThirdSet']),
 		...mapActions('pipes', ['changeFourthSet']),
 		...mapActions('pipes', ['changeFifthSet']),
+		...mapActions('difficulty', ['changeDifficulty']),
 
 		setPipePosition() {
 			this.interval = setInterval(() => {
 				if(this.getStart) {
+
+					if(this.getScore < 10000) {
+						this.difficulty.normal = true;
+						this.difficulty.medium = false;
+						this.difficulty.hard = false;
+						this.difficulty.expert = false;
+						console.log('normal');
+						this.changeDifficulty(this.difficulty);
+					}
+
+					if(this.getScore > 10000 && this.getScore < 17000) {
+						this.difficulty.normal = false;
+						this.difficulty.medium = true;
+						this.difficulty.hard = false;
+						this.difficulty.expert = false;
+						this.changeDifficulty(this.difficulty);
+						console.log('medium');
+					}
+
+					if(this.getScore > 17000 && this.getScore < 22000) {
+						this.difficulty.normal = false;
+						this.difficulty.medium = false;
+						this.difficulty.hard = true;
+						this.difficulty.expert = false;
+						this.changeDifficulty(this.difficulty);
+						console.log('hard');
+
+					}
+
+					if(this.getScore > 22000) {
+						this.difficulty.normal = false;
+						this.difficulty.medium = false;
+						this.difficulty.hard = false;
+						this.difficulty.expert = true;
+						this.changeDifficulty(this.difficulty);
+						console.log('expert');
+
+					}
+ 
 					this.firstSet.y = Math.round(this.$refs.firstPipeBottom.getBoundingClientRect().left);
 					this.firstSet.bottomPipeX = Math.round(this.$refs.firstPipeBottom.getBoundingClientRect().top);
 					this.firstSet.topPipeX = Math.round(this.$refs.firstPipeTop.getBoundingClientRect().bottom);
@@ -162,22 +221,80 @@ export default {
 	position: absolute;
 }
 
-
-
-.firstPipeBottom, 
-.firstPipeTop, 
-.secondPipeBottom, 
-.secondPipeTop, 
-.thirdPipeBottom, 
-.thirdPipeTop,
-.fourthPipeBottom,
-.fourthPipeTop,
-.fifthPipeBottom,
-.fifthPipeTop
-{
+.difficultyDiv{
 	position: absolute;
-	animation: pipe 10s steps(1000) infinite;
+	color: white;
+	right: 1%;
+	bottom: 0%;
 }
+
+
+
+.normal .firstPipeBottom, 
+.normal .firstPipeTop, 
+.normal .secondPipeBottom, 
+.normal .secondPipeTop, 
+.normal .thirdPipeBottom, 
+.normal .thirdPipeTop,
+.normal .fourthPipeBottom,
+.normal .fourthPipeTop,
+.normal .fifthPipeBottom,
+.normal .fifthPipeTop
+{	
+	color: transparent;
+	position: absolute;
+	animation: pipeNormal 10s steps(1000) infinite;
+}
+
+.medium .firstPipeBottom, 
+.medium .firstPipeTop, 
+.medium .secondPipeBottom, 
+.medium .secondPipeTop, 
+.medium .thirdPipeBottom, 
+.medium .thirdPipeTop,
+.medium .fourthPipeBottom,
+.medium .fourthPipeTop,
+.medium .fifthPipeBottom,
+.medium .fifthPipeTop
+{	
+	color: transparent;
+	position: absolute;
+	animation: pipeMedium 7s steps(1000) infinite;
+}
+
+.hard .firstPipeBottom, 
+.hard .firstPipeTop, 
+.hard .secondPipeBottom, 
+.hard .secondPipeTop, 
+.hard .thirdPipeBottom, 
+.hard .thirdPipeTop,
+.hard .fourthPipeBottom,
+.hard .fourthPipeTop,
+.hard .fifthPipeBottom,
+.hard .fifthPipeTop
+{	
+	color: transparent;
+	position: absolute;
+	animation: pipeHard 5s steps(1000) infinite;
+}
+
+.expert .firstPipeBottom, 
+.expert .firstPipeTop, 
+.expert .secondPipeBottom, 
+.expert .secondPipeTop, 
+.expert .thirdPipeBottom, 
+.expert .thirdPipeTop,
+.expert .fourthPipeBottom,
+.expert .fourthPipeTop,
+.expert .fifthPipeBottom,
+.expert .fifthPipeTop
+{	
+	color: transparent;
+	position: absolute;
+	animation: pipeExpert 4s steps(1000) infinite;
+}
+
+
 
 .firstPipeBottom, 
 .secondPipeBottom, 
@@ -251,7 +368,6 @@ export default {
 	margin-left: 1200px;
 }	
 
-
 .fifthPipeBottom{	
 	background-size: 100% 100%;
 	height: 35%;
@@ -265,8 +381,34 @@ export default {
 	margin-left: 1600px;
 }	
 
+	@keyframes pipeNormal {
+	from {
+		left: 130%;
+	}
+	to {
+		left: -130%;
+		}
+	}
 
-	@keyframes pipe {
+	@keyframes pipeMedium {
+	from {
+		left: 130%;
+	}
+	to {
+		left: -130%;
+		}
+	}
+
+	@keyframes pipeHard {
+	from {
+		left: 130%;
+	}
+	to {
+		left: -130%;
+		}
+	}
+
+	@keyframes pipeExpert {
 	from {
 		left: 130%;
 	}

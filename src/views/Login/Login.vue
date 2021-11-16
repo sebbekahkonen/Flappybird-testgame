@@ -88,7 +88,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap');
 
 	.loginDiv{
-		margin-top: 20%;
+		margin-top: 2%;
 		position: absolute;
 		left: 25%;
 		width: 50%;

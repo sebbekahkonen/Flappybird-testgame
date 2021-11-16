@@ -7,6 +7,7 @@ import score from './score';
 import gameover from './gameover';
 import user from './user';
 import authentication from './authentication';
+import difficulty from './difficulty';
 import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
@@ -19,7 +20,8 @@ export default new Vuex.Store({
 		score,
 		gameover,
 		user,
-		authentication
+		authentication,
+		difficulty
 	},
 	plugins: [createPersistedState({
 		key: 'user',

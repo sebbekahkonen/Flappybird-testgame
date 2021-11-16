@@ -12,6 +12,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import Vue from 'vue';
 export default {
 	components:{
 		Keypress: () => import('vue-keypress')
@@ -41,7 +42,7 @@ export default {
 	},
 
 	created() {
-		this.characterCollision();
+		Vue.nextTick(this.characterCollision);
 	},
 
 	methods:{
@@ -61,90 +62,93 @@ export default {
 		},
 
 		characterCollision() {
-			this.interval = setInterval(() => {
-				if(this.getStart === true) {
-					this.position.x = Math.round(this.$refs.character.getBoundingClientRect().top);
-					this.position.y = Math.round(this.$refs.character.getBoundingClientRect().left);
-					this.changePosition(this.position);
-					/* Character position rounded nearest 50 */
-					let characterX = Math.round(this.getPosition.characterX / 30) * 30;
-					let characterY = Math.round(this.getPosition.characterY / 50) * 50;
-	
-					// console.log(this.getPosition.characterY);
-					//78
-					// console.log('count is 0');
-					this.changeScore(this.getScore + 10);
-	
-					/* First set position rounded to nearest 50 */
-					let firstSetBottomX = Math.round(this.getFirstSet.bottomPipeX / 30) * 30;
-					let firstSetTopX =	Math.round(this.getFirstSet.topPipeX / 30) * 30;
-					let firstSetY = Math.round(this.getFirstSet.y / 50) * 50;
+			setTimeout(() => {
 
-					if(characterX >= firstSetBottomX && characterY === firstSetY
-					||
-					characterX <= firstSetTopX && characterY === firstSetY) {
-						// console.log('********GOT HIT FIRST********');
-						this.changeGameover(true);
-						this.changeStart(false);
+				this.interval = setInterval(() => {
+					if(this.getStart === true) {
+						this.position.x = Math.round(this.$refs.character.getBoundingClientRect().top);
+						this.position.y = Math.round(this.$refs.character.getBoundingClientRect().left);
+						this.changePosition(this.position);
+						/* Character position rounded nearest 50 */
+						let characterX = Math.round(this.getPosition.characterX / 30) * 30;
+						let characterY = Math.round(this.getPosition.characterY / 50) * 50;
+		
+						// console.log(this.getPosition.characterY);
+						//78
+						// console.log('count is 0');
+						this.changeScore(this.getScore + 10);
+		
+						/* First set position rounded to nearest 50 */
+						let firstSetBottomX = Math.round(this.getFirstSet.bottomPipeX / 30) * 30;
+						let firstSetTopX =	Math.round(this.getFirstSet.topPipeX / 30) * 30;
+						let firstSetY = Math.round(this.getFirstSet.y / 50) * 50;
+	
+						if(characterX >= firstSetBottomX && characterY === firstSetY
+						||
+						characterX <= firstSetTopX && characterY === firstSetY) {
+							// console.log('********GOT HIT FIRST********');
+							this.changeGameover(true);
+							this.changeStart(false);
+						}
+		
+						/*	Second set position rounded to nearest 50 */
+						let secondSetBottomX = Math.round(this.getSecondSet.bottomPipeX / 30) * 30;
+						let secondSetTopX =	Math.round(this.getSecondSet.topPipeX / 30) * 30;
+						let secondSetY = Math.round(this.getSecondSet.y / 50) * 50;
+		
+						if(characterX >= secondSetBottomX && characterY === secondSetY
+						||
+						characterX <= secondSetTopX && characterY === secondSetY) {
+							// console.log('********GOT HIT SECOND********');
+							this.changeGameover(true);
+							this.changeStart(true);
+						}
+		
+						/*	Third set position rounded to nearest 50 */
+						let thirdSetBottomX = Math.round(this.getThirdSet.bottomPipeX / 30) * 30;
+						let thirdSetTopX =	Math.round(this.getThirdSet.topPipeX / 30) * 30;
+						let thirdSetY = Math.round(this.getThirdSet.y / 50) * 50;
+		
+						if(characterX >= thirdSetBottomX && characterY === thirdSetY
+						||
+						characterX <= thirdSetTopX && characterY === thirdSetY) {
+							// console.log('********GOT HIT THIRD********');
+							this.changeGameover(true);
+							this.changeStart(true);
+						}
+		
+						/*	Fourth set position rounded to nearest 50 */
+						let fourthSetBottomX = Math.round(this.getFourthSet.bottomPipeX / 30) * 30;
+						let fourthSetTopX =	Math.round(this.getFourthSet.topPipeX / 30) * 30;
+						let fourthSetY = Math.round(this.getFourthSet.y / 50) * 50;
+		
+						if(characterX >= fourthSetBottomX && characterY === fourthSetY
+						||
+						characterX <= fourthSetTopX && characterY === fourthSetY) {
+							// console.log('********GOT HIT FOURTH********');
+							this.changeGameover(true);
+							this.changeStart(true);
+						}
+		
+						/*	Fifth set position rounded to nearest 50 */
+						let fifthSetBottomX = Math.round(this.getFifthSet.bottomPipeX / 30) * 30;
+						let fifthSetTopX =	Math.round(this.getFifthSet.topPipeX / 30) * 30;
+						let fifthSetY = Math.round(this.getFifthSet.y / 50) * 50;
+		
+						if(characterX >= fifthSetBottomX && characterY === fifthSetY
+						||
+						characterX <= fifthSetTopX && characterY === fifthSetY) {
+							// console.log('********GOT HIT FIFTH********');
+							this.changeGameover(true);
+							this.changeStart(true);
+						}
+		
+					} else{
+						this.changeScore(0);
 					}
-	
-					/*	Second set position rounded to nearest 50 */
-					let secondSetBottomX = Math.round(this.getSecondSet.bottomPipeX / 30) * 30;
-					let secondSetTopX =	Math.round(this.getSecondSet.topPipeX / 30) * 30;
-					let secondSetY = Math.round(this.getSecondSet.y / 50) * 50;
-	
-					if(characterX >= secondSetBottomX && characterY === secondSetY
-					||
-					characterX <= secondSetTopX && characterY === secondSetY) {
-						// console.log('********GOT HIT SECOND********');
-						this.changeGameover(true);
-						this.changeStart(true);
-					}
-	
-					/*	Third set position rounded to nearest 50 */
-					let thirdSetBottomX = Math.round(this.getThirdSet.bottomPipeX / 30) * 30;
-					let thirdSetTopX =	Math.round(this.getThirdSet.topPipeX / 30) * 30;
-					let thirdSetY = Math.round(this.getThirdSet.y / 50) * 50;
-	
-					if(characterX >= thirdSetBottomX && characterY === thirdSetY
-					||
-					characterX <= thirdSetTopX && characterY === thirdSetY) {
-						// console.log('********GOT HIT THIRD********');
-						this.changeGameover(true);
-						this.changeStart(true);
-					}
-	
-					/*	Fourth set position rounded to nearest 50 */
-					let fourthSetBottomX = Math.round(this.getFourthSet.bottomPipeX / 30) * 30;
-					let fourthSetTopX =	Math.round(this.getFourthSet.topPipeX / 30) * 30;
-					let fourthSetY = Math.round(this.getFourthSet.y / 50) * 50;
-	
-					if(characterX >= fourthSetBottomX && characterY === fourthSetY
-					||
-					characterX <= fourthSetTopX && characterY === fourthSetY) {
-						// console.log('********GOT HIT FOURTH********');
-						this.changeGameover(true);
-						this.changeStart(true);
-					}
-	
-					/*	Fifth set position rounded to nearest 50 */
-					let fifthSetBottomX = Math.round(this.getFifthSet.bottomPipeX / 30) * 30;
-					let fifthSetTopX =	Math.round(this.getFifthSet.topPipeX / 30) * 30;
-					let fifthSetY = Math.round(this.getFifthSet.y / 50) * 50;
-	
-					if(characterX >= fifthSetBottomX && characterY === fifthSetY
-					||
-					characterX <= fifthSetTopX && characterY === fifthSetY) {
-						// console.log('********GOT HIT FIFTH********');
-						this.changeGameover(true);
-						this.changeStart(true);
-					}
-	
-				} else{
-					this.changeScore(0);
-				}
-					
-			}, 10);
+						
+				}, 10);
+			}, 1000);
 		},
 		
 		jump() {

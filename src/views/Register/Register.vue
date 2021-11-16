@@ -15,7 +15,7 @@
 				class="registerForm"
 			>
 				<v-text-field
-					v-model="name"
+					v-model="formData.username"
 					:counter="10"
 					:rules="nameRules"
 					label="Username"
@@ -24,7 +24,7 @@
 				/>
 
 				<v-text-field
-					v-model="password"
+					v-model="formData.password"
 					:rules="passwordRules"
 					label="Password"
 					class="password"
@@ -32,7 +32,7 @@
 				/>
 
 				<v-text-field
-					v-model="email"
+					v-model="formData.email"
 					:rules="emailRules"
 					label="E-mail"
 					class="email"
@@ -62,20 +62,26 @@
 	</div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
 export default {
 	data: () => ({
+		formData: {
+			id: 1234,
+			username: '',
+			password: '',
+			email: '',
+			token: '1A2s3d'	
+		},
+		
 		valid: true,
-		name: '',
 		nameRules: [
 			v => !!v || 'Name is required',
 			v => (v && v.length <= 10) || 'Name must be less than 10 characters'
 		],
-		password: '',
 		passwordRules: [
 			v => !!v || 'Password is required',
 			v => (v && v.length >= 5) || 'Password must be atleast 5 characters'
 		],
-		email: '',
 		emailRules: [
 			v => !!v || 'E-mail is required',
 			v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
@@ -90,9 +96,18 @@ export default {
 		checkbox: false
 	}),
 
+	computed: {
+		...mapGetters('user', ['getNewUser'])
+	},
+
 	methods: {
+		...mapActions('authentication', ['changeAuthentication']),
+		...mapActions('user', ['addUser']),
+
 		Register() {
-			this.$refs.form.validate();
+			this.addUser(this.formData);
+			this.changeAuthentication(true);
+			this.$router.push('/');
 		}
 	}
 };
@@ -101,7 +116,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap');
 
 	.registerDiv{
-		margin-top: 20%;
+		margin-top: 2%;
 		position: absolute;
 		left: 25%;
 		width: 50%;
