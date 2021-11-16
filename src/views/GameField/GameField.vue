@@ -83,6 +83,7 @@ export default {
 		...mapGetters('pipes', ['getFifthSet'])
 	},
 	mounted() {
+		// Vue.nextTick(this.checkAuthentication);
 		Vue.nextTick(this.setPipePosition);
 	},
 
@@ -94,7 +95,7 @@ export default {
 		...mapActions('pipes', ['changeFourthSet']),
 		...mapActions('pipes', ['changeFifthSet']),
 
-		setPipePosition() { 
+		setPipePosition() {
 			this.interval = setInterval(() => {
 				if(this.getStart) {
 					this.firstSet.y = Math.round(this.$refs.firstPipeBottom.getBoundingClientRect().left);
@@ -102,28 +103,28 @@ export default {
 					this.firstSet.topPipeX = Math.round(this.$refs.firstPipeTop.getBoundingClientRect().bottom);
 					// console.log('First: ', 'Both Y: ',this.firstSet.y, 'Bottom X: ',this.firstSet.bottomPipeX, 'Top Bottom: ',this.firstSet.topPipeX);
 					this.changeFirstSet(this.firstSet);
-	
+		
 					/* Second set */
 					this.secondSet.y = Math.round(this.$refs.secondPipeBottom.getBoundingClientRect().left);
 					this.secondSet.bottomPipeX = Math.round(this.$refs.secondPipeBottom.getBoundingClientRect().top);
 					this.secondSet.topPipeX = Math.round(this.$refs.secondPipeTop.getBoundingClientRect().bottom);
 					// console.log('Second: ', 'Both Y: ',this.secondSet.y, 'Bottom X: ',this.secondSet.bottomPipeX, 'Top Bottom: ',this.secondSet.topPipeX);
 					this.changeSecondSet(this.secondSet);
-	
+		
 					/* Third set */
 					this.thirdSet.y = Math.round(this.$refs.thirdPipeBottom.getBoundingClientRect().left);
 					this.thirdSet.bottomPipeX = Math.round(this.$refs.thirdPipeBottom.getBoundingClientRect().top);
 					this.thirdSet.topPipeX = Math.round(this.$refs.thirdPipeTop.getBoundingClientRect().bottom);
 					// console.log('Third: ', 'Both Y: ',this.thirdSet.y, 'Bottom X: ',this.thirdSet.bottomPipeX, 'Top Bottom: ',this.thirdSet.topPipeX);
 					this.changeThirdSet(this.thirdSet);
-	
+		
 					/* Fourth set */
 					this.fourthSet.y = Math.round(this.$refs.fourthPipeBottom.getBoundingClientRect().left);
 					this.fourthSet.bottomPipeX = Math.round(this.$refs.fourthPipeBottom.getBoundingClientRect().top);
 					this.fourthSet.topPipeX = Math.round(this.$refs.fourthPipeTop.getBoundingClientRect().bottom);
 					// console.log('Fourth: ', 'Both Y: ',this.fourthSet.y, 'Bottom X: ',this.fourthSet.bottomPipeX, 'Top Bottom: ',this.fourthSet.topPipeX);
 					this.changeFourthSet(this.fourthSet);
-	
+		
 					/* Fifth set */
 					this.fifthSet.y = Math.round(this.$refs.fifthPipeBottom.getBoundingClientRect().left);
 					this.fifthSet.bottomPipeX = Math.round(this.$refs.fifthPipeBottom.getBoundingClientRect().top);
@@ -134,8 +135,9 @@ export default {
 					return;
 				}
 				/* First set */
-
+	
 			}, 10);
+
 		}
 	}
 

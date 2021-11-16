@@ -8,32 +8,80 @@
 			color="grey lighten-2"
 		>
 			<h1>login</h1>
+			<p class="errorCode">{{ errorCode }}</p>
 			<v-text-field
+				v-model="formData.username"
 				label="Username"
 				append-icon="mdi-account"
 				class="username"
 				hide-details="auto"
 			/>
-			<v-text-field label="Password"
+			<v-text-field
+				v-model="formData.password" 
+				label="Password"
 				class="password"
 				:append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" 
 				:type="show1 ? 'text' : 'password'"
 				@click:append="show1 = !show1"
 			/>
-			<v-btn color="blue-grey lighten-2" class="loginBtn">Login</v-btn>
-			<v-btn color="blue-grey darken-1" class="registerBtn">Register</v-btn>
+			<v-btn v-if="!isPending" color="blue-grey lighten-2" class="loginBtn" @click="loginUser">Login</v-btn>
+			<v-btn v-if="!isPending" color="blue-grey darken-1" class="registerBtn">Register</v-btn>
+			<Spinner v-if="isPending" />
 		</v-sheet>
 	</div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex';
+import Spinner from '@/components/Spinner';
 export default {
+	components: {
+		Spinner
+	},
+
 	data: () => ({
-		show1: false
-		// rules: [
-		// 	value => !!value || 'Required.',
-		// 	value => (value && value.length >= 3) || 'Required.'
-		// ]
-	})
+		show1: false,
+		formData: {
+			username: '',
+			password: ''
+		},
+		errorCode: '',
+		isPending: false
+	}),
+
+	computed: {
+		...mapGetters('authentication', ['getAuthentication']),
+		validation() {
+			return{
+				inputFilled: this.formData.username && 
+				this.formData.password !== '' 
+			};
+		}
+	},
+
+	created() {
+		console.log(this.getAuthentication);
+		this.changeAuthentication(false);
+	},
+	
+	methods: {
+		...mapActions('user', ['login']),
+		...mapActions('authentication', ['changeAuthentication']),
+		async loginUser() {
+			this.errorCode = '';
+			this.isPending = true;
+			try{
+				await this.login(this.formData);
+				this.changeAuthentication(true);
+				this.$router.push('/');
+			}catch(err) {
+				this.errorCode = err;
+				console.log(err);
+			}finally{
+				this.isPending = false;
+			}
+
+		}
+	}
 	
 };
 </script>
@@ -79,6 +127,9 @@ export default {
 		width: 60%;
 		color: white;
 		background: linear-gradient(to bottom, rgb(105, 105, 105), rgb(175, 175, 175));
+	}
+	.errorCode{
+		color: red;
 	}
 
 </style>

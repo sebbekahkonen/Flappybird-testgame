@@ -5,6 +5,9 @@ import startgame from './startgame';
 import pipes from './pipes';
 import score from './score';
 import gameover from './gameover';
+import user from './user';
+import authentication from './authentication';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
@@ -14,6 +17,12 @@ export default new Vuex.Store({
 		startgame,
 		pipes,
 		score,
-		gameover
-	}
+		gameover,
+		user,
+		authentication
+	},
+	plugins: [createPersistedState({
+		key: 'user',
+		paths: ['user']
+	})]
 });

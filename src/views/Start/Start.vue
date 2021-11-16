@@ -11,6 +11,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import GameField from '../GameField/GameField.vue';
 import Gameover from '../Gameover/Gameover.vue';
+import Vue from 'vue';
 export default {
 	components:{
 		GameField,
@@ -27,10 +28,12 @@ export default {
 		...mapGetters('startgame', ['getKeydown']),
 		...mapGetters('gameover', ['getGameover']),
 		...mapGetters('score', ['getScore']),
-		...mapGetters('score', ['getHighScore'])
+		...mapGetters('score', ['getHighScore']),
+		...mapGetters('authentication', ['getAuthentication'])
 	},
 
 	created() {
+		Vue.nextTick(this.checkAuthentication);
 	},
 
 	methods: {
@@ -39,6 +42,14 @@ export default {
 		...mapActions('gameover', ['changeGameover']),
 		...mapActions('score', ['changeScore']),
 		...mapActions('score', ['changeHighScore']),
+
+		checkAuthentication() {
+			console.log(this.getAuthentication);
+
+			if(this.getAuthentication === false) {
+				this.$router.push('/login');	
+			}
+		},
 
 		startGame() {
 			this.changeGameover(false);
