@@ -38,6 +38,7 @@
 					class="email"
 					required
 				/>
+				<p v-html="errorCode">{{ errorCode }}</p>
 
 				<v-checkbox
 					v-model="checkbox"
@@ -73,6 +74,8 @@ export default {
 			email: '',
 			token: '1A2s3d'	
 		},
+
+		errorCode: '',
 		
 		valid: true,
 		nameRules: [
@@ -106,12 +109,18 @@ export default {
 		...mapActions('user', ['register']),
 
 		async Register() {
-			const response = await authenticationService.register({
-				email: this.formData.email,
-				password: this.formData.password
-			});
+			this.errorCode = '';
+			try{
+				const response = await authenticationService.register({
+					email: this.formData.email,
+					password: this.formData.password
+				});
+				
+				console.log('response: ', response.data);
+			} catch (err) {
+				this.errorCode = err.response.data.error;
+			}
 
-			console.log('response: ', response.data);
 			// console.log('BEFORE: ',this.getNewUser);
 			// this.addUser(this.formData);
 			// console.log('AFTER: ',this.getNewUser);
@@ -157,5 +166,9 @@ export default {
 
 	.checkBox{
 		padding: 0px 0px 10px 10px;
+	}
+
+	p{
+		color: red;
 	}
 </style>
