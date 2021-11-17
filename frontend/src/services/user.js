@@ -1,3 +1,4 @@
+import api from '@/services/api';
 
 export const login = (username, password) => {
 	return new Promise((resolve, reject) => {
@@ -20,4 +21,8 @@ export const login = (username, password) => {
 		}, 3000);
 
 	});
+};
+
+export const register = (credentials) => {
+	return api().post('register', credentials);
 };

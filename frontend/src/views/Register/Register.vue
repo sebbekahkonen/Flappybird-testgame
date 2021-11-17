@@ -63,6 +63,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import authenticationService from '@/services/authenticationService';
 export default {
 	data: () => ({
 		formData: {
@@ -102,14 +103,20 @@ export default {
 
 	methods: {
 		...mapActions('authentication', ['changeAuthentication']),
-		...mapActions('user', ['addUser']),
+		...mapActions('user', ['register']),
 
-		Register() {
-			console.log('BEFORE: ',this.getNewUser);
-			this.addUser(this.formData);
-			console.log('AFTER: ',this.getNewUser);
-			this.changeAuthentication(true);
-			this.$router.push('/');
+		async Register() {
+			const response = await authenticationService.register({
+				email: this.formData.email,
+				password: this.formData.password
+			});
+
+			console.log('response: ', response.data);
+			// console.log('BEFORE: ',this.getNewUser);
+			// this.addUser(this.formData);
+			// console.log('AFTER: ',this.getNewUser);
+			// this.changeAuthentication(true);
+			// this.$router.push('/');
 		}
 	}
 };

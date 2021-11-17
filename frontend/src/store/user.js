@@ -40,8 +40,10 @@ export default {
 			commit('setUser', userData);
 		},
 
-		addUser({ commit }, data) {
-			commit('setNewUser', data);
+		async register({ commit }, data) {
+			const newUser = await services.user.register(data.username, data.email, data.password);
+
+			commit('setNewUser', newUser);
 		},
 
 		logout({ commit }) {
