@@ -34,7 +34,6 @@
 
 		<v-main class="grey darken-1">
 			<router-view />
-			<!--  -->
 		</v-main>
 	</v-app>
 </template>
@@ -45,8 +44,7 @@ export default {
 		links: [
 			{title: 'Start', icon: 'mdi-play-box-outline', to:'/'},
 			{title: 'Profile', icon: 'mdi-autorenew', to:'/profile'},
-			{title: 'Login', icon: 'mdi-account', to:'/login'},
-			{title: 'Exit', icon: 'mdi-exit-run', to:'/exit'}
+			{title: 'Login', icon: 'mdi-account', to:'/login'}
 		]
 	})
 };

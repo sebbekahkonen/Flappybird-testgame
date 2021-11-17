@@ -6,25 +6,21 @@ export default {
 		highScore: null
 	},
 	mutations: {
-		setScore(state, score) {
-			state.score = score;
+		setScore(state, data) {
+			state.score = data;
 		},
 
-		setHighScore(state, highScore) {
-			state.highScore = highScore;
+		setHighScore(state, data) {
+			state.highScore = data;
 		}
 	},
 	actions: {
-		changeScore({ commit }, score) {
-			const newScore = score;
-
-			commit('setScore', newScore);
+		changeScore({ commit }, data) {
+			commit('setScore', data);
 		},
 
-		changeHighScore({ commit }, highScore) {
-			const newScore = highScore;
-
-			commit('setHighScore', newScore);
+		changeHighScore({ commit }, data) {
+			commit('setHighScore', data);
 		}
 	},
 	getters: {

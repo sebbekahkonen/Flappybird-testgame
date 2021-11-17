@@ -28,16 +28,17 @@ export default {
 	}),
 
 	computed:{
-		...mapGetters('character', ['getTopVal']),
-		...mapGetters('character', ['getPosition']),
-		...mapGetters('startgame', ['getStart']),
-		...mapGetters('pipes', ['getFirstSet']),
-		...mapGetters('pipes', ['getSecondSet']),
-		...mapGetters('pipes', ['getThirdSet']),
-		...mapGetters('pipes', ['getFourthSet']),
-		...mapGetters('pipes', ['getFifthSet']),
+		...mapGetters('character', ['getTopVal', 'getPosition']),
+		...mapGetters('startgame', ['getStart', 'getKeydown']),
+		...mapGetters('pipes', 
+			[
+				'getFirstSet',
+				'getSecondSet',
+				'getThirdSet',
+				'getFourthSet',
+				'getFifthSet'
+			]),
 		...mapGetters('score', ['getScore']),
-		...mapGetters('startgame', ['getKeydown']),
 		...mapGetters('gameover', ['getGameover'])
 	},
 
@@ -46,11 +47,9 @@ export default {
 	},
 
 	methods:{
-		...mapActions('character', ['changeTopVal']),
-		...mapActions('character', ['changePosition']),
-		...mapActions('startgame', ['changeStart']),
+		...mapActions('character', ['changeTopVal', 'changePosition']),
+		...mapActions('startgame', ['changeStart', 'changeKeydown']),
 		...mapActions('score', ['changeScore']),
-		...mapActions('startgame', ['changeKeydown']),
 		...mapActions('gameover', ['changeGameover']),
 
 		startTheGame() {
@@ -70,12 +69,9 @@ export default {
 						this.position.y = Math.round(this.$refs.character.getBoundingClientRect().left);
 						this.changePosition(this.position);
 						/* Character position rounded nearest 50 */
-						let characterX = Math.round(this.getPosition.characterX / 30) * 30;
-						let characterY = Math.round(this.getPosition.characterY / 50) * 50;
-		
-						// console.log(this.getPosition.characterY);
-						//78
-						// console.log('count is 0');
+						let characterX = Math.round(this.getPosition.x / 30) * 30;
+						let characterY = Math.round(this.getPosition.y / 50) * 50;
+
 						this.changeScore(this.getScore + 10);
 		
 						/* First set position rounded to nearest 50 */
@@ -86,7 +82,6 @@ export default {
 						if(characterX >= firstSetBottomX && characterY === firstSetY
 						||
 						characterX <= firstSetTopX && characterY === firstSetY) {
-							// console.log('********GOT HIT FIRST********');
 							this.changeGameover(true);
 							this.changeStart(false);
 						}
@@ -99,7 +94,6 @@ export default {
 						if(characterX >= secondSetBottomX && characterY === secondSetY
 						||
 						characterX <= secondSetTopX && characterY === secondSetY) {
-							// console.log('********GOT HIT SECOND********');
 							this.changeGameover(true);
 							this.changeStart(true);
 						}
@@ -112,7 +106,6 @@ export default {
 						if(characterX >= thirdSetBottomX && characterY === thirdSetY
 						||
 						characterX <= thirdSetTopX && characterY === thirdSetY) {
-							// console.log('********GOT HIT THIRD********');
 							this.changeGameover(true);
 							this.changeStart(true);
 						}
@@ -125,7 +118,6 @@ export default {
 						if(characterX >= fourthSetBottomX && characterY === fourthSetY
 						||
 						characterX <= fourthSetTopX && characterY === fourthSetY) {
-							// console.log('********GOT HIT FOURTH********');
 							this.changeGameover(true);
 							this.changeStart(true);
 						}
@@ -138,7 +130,6 @@ export default {
 						if(characterX >= fifthSetBottomX && characterY === fifthSetY
 						||
 						characterX <= fifthSetTopX && characterY === fifthSetY) {
-							// console.log('********GOT HIT FIFTH********');
 							this.changeGameover(true);
 							this.changeStart(true);
 						}
@@ -153,7 +144,6 @@ export default {
 		
 		jump() {
 			if(this.getStart === true) {
-				// console.log('test');
 				this.changeKeydown(true);
 	
 				this.jumpInterval = setInterval(() => {
@@ -169,8 +159,6 @@ export default {
 
 		stopJump() {
 			this.changeKeydown(false);
-			// console.log(this.getKeydown);
-			// console.log('cleared');
 			clearInterval(this.jumpInterval);
 		}
 	}

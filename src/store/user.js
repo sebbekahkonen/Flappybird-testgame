@@ -14,7 +14,7 @@ const initialStateNewUser = () => ({
 	username: '',
 	email: '',
 	password: '',
-	token: 'testtoken'
+	token: ''
 });
 
 export default {
@@ -26,7 +26,6 @@ export default {
 	},
 	mutations: {
 		setUser(state, data) {
-			console.log(data);
 			state.user = data;
 		},
 
@@ -39,13 +38,10 @@ export default {
 			const userData = await services.user.login(data.username, data.password);
 
 			commit('setUser', userData);
-
 		},
 
 		addUser({ commit }, data) {
-			const newUser = [data.username, data.id, data.token, data.email, data.password];
-
-			commit('setNewUser', newUser);
+			commit('setNewUser', data);
 		},
 
 		logout({ commit }) {
@@ -59,8 +55,6 @@ export default {
 		},
 
 		getNewUser(state) {
-			console.log(state.newUser);
-
 			return state.newUser;
 		}
 	}

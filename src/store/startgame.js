@@ -6,25 +6,21 @@ export default {
 		keydown: false
 	},
 	mutations: {
-		setStart(state, start) {
-			state.start = start;
+		setStart(state, data) {
+			state.start = data;
 		},
 
-		setKeydown(state, keydown) {
-			state.keydown = keydown;
+		setKeydown(state, data) {
+			state.keydown = data;
 		}
 	},
 	actions: {
-		changeStart({ commit }, start) {
-			const newStartValue = start;
-
-			commit('setStart', newStartValue);
+		changeStart({ commit }, data) {
+			commit('setStart', data);
 		},
 
-		changeKeydown({ commit }, keydown) {
-			const newKeydownValue = keydown;
-
-			commit('setKeydown', newKeydownValue);
+		changeKeydown({ commit }, data) {
+			commit('setKeydown', data);
 		}
 
 	},

@@ -22,8 +22,6 @@ const fifthSet = () => ({
 	y: null,
 	bottomPipeX: null,
 	topPipeX: null
-	//topBottom
-	//bottomX
 });
 
 export default {
@@ -39,56 +37,36 @@ export default {
 	},
 	mutations: {
 		setFirstSet(state, data) {
-			state.firstPipes.y = data[0];
-			state.firstPipes.bottomPipeX = data[1];
-			state.firstPipes.topPipeX = data[2];
+			state.firstPipes = data;
 		},
 		setSecondSet(state, data) {
-			state.secondPipes.y = data[0];
-			state.secondPipes.bottomPipeX = data[1];
-			state.secondPipes.topPipeX = data[2];
+			state.secondPipes = data;
 		},
 		setThirdSet(state, data) {
-			state.thirdPipes.y = data[0];
-			state.thirdPipes.bottomPipeX = data[1];
-			state.thirdPipes.topPipeX = data[2];
+			state.thirdPipes = data;
 		},
 		setFourthSet(state, data) {
-			state.fourthPipes.y = data[0];
-			state.fourthPipes.bottomPipeX = data[1];
-			state.fourthPipes.topPipeX = data[2];
+			state.fourthPipes = data;
 		},
 		setFifthSet(state, data) {
-			state.fifthPipes.y = data[0];
-			state.fifthPipes.bottomPipeX = data[1];
-			state.fifthPipes.topPipeX = data[2];
+			state.fifthPipes = data;
 		}
 	},
 	actions: {
 		changeFirstSet({ commit }, data) {
-			const newFirstSet = [data.y, data.bottomPipeX, data.topPipeX];
-
-			commit('setFirstSet', newFirstSet);
+			commit('setFirstSet', data);
 		},
 		changeSecondSet({ commit }, data) {
-			const newSecondSet = [data.y, data.bottomPipeX, data.topPipeX];
-
-			commit('setSecondSet', newSecondSet);
+			commit('setSecondSet', data);
 		},
 		changeThirdSet({ commit }, data) {
-			const newThirdSet = [data.y, data.bottomPipeX, data.topPipeX];
-
-			commit('setThirdSet', newThirdSet);
+			commit('setThirdSet', data);
 		},
 		changeFourthSet({ commit }, data) {
-			const newFourthSet = [data.y, data.bottomPipeX, data.topPipeX];
-
-			commit('setFourthSet', newFourthSet);
+			commit('setFourthSet', data);
 		},
 		changeFifthSet({ commit }, data) {
-			const newFifthSet = [data.y, data.bottomPipeX, data.topPipeX];
-
-			commit('setFifthSet', newFifthSet);
+			commit('setFifthSet', data);
 		}
 	},
 	getters: {

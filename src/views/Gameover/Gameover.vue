@@ -32,7 +32,6 @@ div {
 	width: 100%;
 	height: 50%;
 	position: absolute;
-	/* border: 1px solid green; */
 	top: 25%;
 	left: 0%;
 	font-size: 40px;

@@ -105,7 +105,9 @@ export default {
 		...mapActions('user', ['addUser']),
 
 		Register() {
+			console.log('BEFORE: ',this.getNewUser);
 			this.addUser(this.formData);
+			console.log('AFTER: ',this.getNewUser);
 			this.changeAuthentication(true);
 			this.$router.push('/');
 		}
@@ -121,10 +123,8 @@ export default {
 		left: 25%;
 		width: 50%;
 		height: 500px;
-		/* border: 1px solid green; */
 		text-align: center;
 		border-radius: 10px;
-		/* background: linear-gradient(to bottom, rgb(194, 194, 194), rgb(235, 235, 235)); */
 	}
 	
 	h1{

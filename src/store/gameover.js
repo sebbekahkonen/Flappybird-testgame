@@ -5,15 +5,13 @@ export default {
 		gameOver: false
 	},
 	mutations: {
-		setGameover(state, gameOver) {
-			state.gameOver = gameOver;
+		setGameover(state, data) {
+			state.gameOver = data;
 		}
 	},
 	actions: {
-		changeGameover({ commit }, gameOver) {
-			const newGameoverValue = gameOver;
-
-			commit('setGameover', newGameoverValue);
+		changeGameover({ commit }, data) {
+			commit('setGameover', data);
 		}
 	},
 	getters: {

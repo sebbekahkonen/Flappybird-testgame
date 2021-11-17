@@ -11,27 +11,21 @@ export default {
 		position: characterPosition()
 	},
 	mutations: {
-		setTopValue(state, topValue) {
-			state.topValue = topValue;
+		setTopValue(state, data) {
+			state.topValue = data;
 		},
 
 		setPosition(state, data) {
-			state.position.characterX = data[0];
-			state.position.characterY = data[1];
-
+			state.position = data;
 		}
 	},
 	actions: {
-		changeTopVal({ commit }, topValue) {
-			const newTopValue = topValue;
-
-			commit('setTopValue', newTopValue);
+		changeTopVal({ commit }, data) {
+			commit('setTopValue', data);
 		},
 
 		changePosition({ commit }, data) {
-			const newPosition = [data.x, data.y];
-
-			commit('setPosition', newPosition);
+			commit('setPosition', data);
 		}
 	},
 	getters: {

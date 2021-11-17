@@ -5,15 +5,13 @@ export default {
 		authenticated: false
 	},
 	mutations: {
-		setAuth(state, authenticated) {
-			state.authenticated = authenticated;
+		setAuth(state, data) {
+			state.authenticated = data;
 		}
 	},
 	actions: {
-		changeAuthentication({ commit }, authenticated) {
-			const newAuthentication = authenticated;
-
-			commit('setAuth', newAuthentication);
+		changeAuthentication({ commit }, data) {
+			commit('setAuth', data);
 		}
 	},
 	getters: {

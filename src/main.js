@@ -16,8 +16,6 @@ const httpClient = axios.create({
 	}
 });
 
-// console.log(store.state.user.user.token);
-// console.log(store.state.user.user.username);
 httpClient.interceptors.request.use(config => {
 	const token = store.state.user.user.token;
 
@@ -30,10 +28,7 @@ httpClient.interceptors.request.use(config => {
 httpClient.interceptors.response.use(res => res, error => {
 	console.log(error.response.status);
 
-	// if (error.response.status === 404) {
-	// 	router.push('/login');
-	// }
-	if (store.state.user.user.token === '') {
+	if (error.response.status === 404) {
 		router.push('/login');
 	}
 
